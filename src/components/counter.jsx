@@ -3,35 +3,24 @@ import React, { Component } from "react";
 class Counter extends Component {
   state = {
     count: 0,
-    tags: ["tag1", "tag2", "tag3"],
   };
 
-  handleIncrement = ({ id }) => {
-    console.log(`Product: ${id}`);
+  handleIncrement = () => {
     this.setState({ count: this.state.count + 1 });
   };
 
-  renderTags() {
-    if (this.state.tags.length === 0) return <p>There are no tags</p>;
-    else
-      return (
-        <React.Fragment>
-          <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
-          <button
-            onClick={() => {
-              this.handleIncrement({ id: 1 });
-            }}
-            className="btn btn-secondary btn-sm"
-          >
-            Element
-          </button>
-          <ul>
-            {this.state.tags.map((tag) => (
-              <li key={tag}>{tag}</li>
-            ))}
-          </ul>
-        </React.Fragment>
-      );
+  render() {
+    return (
+      <div>
+        <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
+        <button
+          onClick={this.handleIncrement}
+          className="btn btn-secondary btn-sm"
+        >
+          Increment
+        </button>
+      </div>
+    );
   }
 
   getBadgeClasses() {
@@ -43,15 +32,6 @@ class Counter extends Component {
   formatCount() {
     const { count } = this.state;
     return count === 0 ? "Zero" : count;
-  }
-
-  render() {
-    return (
-      <React.Fragment>
-        {this.state.tags.length === 0 && <p>Please create a new tag!</p>}
-        {this.renderTags()}
-      </React.Fragment>
-    );
   }
 }
 
