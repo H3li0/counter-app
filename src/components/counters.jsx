@@ -11,8 +11,15 @@ class Counters extends Component {
     ],
   };
 
+  handleIncrement = (counter) => {
+    const counters = [...this.state.counters];
+    const index = counters.indexOf(counter);
+    counters[index] = { ...counter };
+    counters[index].value++;
+    this.setState({ counters });
+  };
+
   handleReset = () => {
-    console.log("entrei em handleReset()");
     const counters = this.state.counters.map((counter) => {
       counter.value = 0;
       return counter;
@@ -38,6 +45,7 @@ class Counters extends Component {
           <Counter
             key={counter.id}
             onDelete={this.handleDelete}
+            onIncrement={this.handleIncrement}
             counter={counter}
           />
         ))}
